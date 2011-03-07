@@ -293,7 +293,11 @@ key on UpdateManager using UpdateManager#key=
       end
 
       def visit_Arel_Nodes_NotIn o
-        "#{visit o.left} NOT IN (#{visit o.right})"
+        if (right = visit o.right) == "NULL"
+          "0 = 0"
+        else
+          "#{visit o.left} NOT IN (#{right})"
+        end
       end
 
       def visit_Arel_Nodes_And o
