@@ -101,6 +101,33 @@ module Arel
         node.name.must_equal 'users_2'
         node[:id].relation.must_equal node
       end
+      
+      describe 'when given a alias name' do
+        it 'will give the alias the provided name' do
+          @relation.aliases.must_equal []
+
+          node = @relation.alias("test_alias")
+          @relation.aliases.must_equal [node]
+          node.name.must_equal 'test_alias'
+          node[:id].relation.must_equal node
+        end
+      end
+      
+      describe 'when not given an alias name' do
+        it 'should increment alias names' do
+          @relation.aliases.must_equal []
+
+          node = @relation.alias
+          @relation.aliases.must_equal [node]
+          node.name.must_equal 'users_2'
+          node[:id].relation.must_equal node        
+          
+          node_2 = @relation.alias
+          @relation.aliases.must_equal [node, node_2]
+          node_2.name.must_equal 'users_3'
+          node_2[:id].relation.must_equal node_2
+        end
+      end
     end
 
     describe 'new' do

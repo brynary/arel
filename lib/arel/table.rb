@@ -42,7 +42,7 @@ primary_key (#{caller.first}) is deprecated and will be removed in ARel 3.0.0
       end
     end
 
-    def alias name = "#{self.name}_2"
+    def alias name = "#{self.name}_#{@aliases.length + 2}"
       Nodes::TableAlias.new(name, self).tap do |node|
         @aliases << node
       end
