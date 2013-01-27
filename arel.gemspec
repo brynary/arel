@@ -40,4 +40,5 @@ database compatibility and query generation.}
     s.add_dependency(%q<minitest>, [">= 2.0.2"])
     s.add_dependency(%q<hoe>, [">= 2.9.1"])
   end
+  s.license = "MIT"
 end
