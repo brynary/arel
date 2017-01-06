@@ -233,10 +233,10 @@ module Arel
           }
         end
 
-        it "should turn empty right to NULL" do
+        it "should evaluate to true for empty strings" do
           node = @attr.not_in []
           @visitor.accept(node).must_be_like %{
-            "users"."id" NOT IN (NULL)
+            0 = 0
           }
         end
 
@@ -264,7 +264,7 @@ module Arel
         end
 
         it 'uses the same column for escaping values' do
-        @attr = Table.new(:users)[:name]
+          @attr = Table.new(:users)[:name]
           visitor = Class.new(ToSql) do
             attr_accessor :expected
 
